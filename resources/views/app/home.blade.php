@@ -6,7 +6,10 @@
 @endsection
 
 @section('content')
-    <div class="row mt-5">
+    <h1 class="d-flex justify-content-around mt-5">
+        Новости
+    </h1>
+    <div class="row mt-2">
         @foreach($articles as $article)
             <div class="col-6 pb-3">
                 <div class="card">
