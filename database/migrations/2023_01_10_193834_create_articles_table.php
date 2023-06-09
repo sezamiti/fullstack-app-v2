@@ -20,7 +20,7 @@ class CreateArticlesTable extends Migration
             $table->string('slug')->unique();
             $table->text('body');
             $table->string('img');
-//            $table->timestamp('published_at');
+            $table->timestamp("published_at")->default(now());
             $table->timestamps();
             // created_at
             // updated_at

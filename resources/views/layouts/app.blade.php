@@ -15,12 +15,12 @@
         <div class="container-fluid">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link menu-link  "
-                       href="#">Главная страница</a>
+                    <a class="nav-link menu-link  {{ request()->is('/') ? 'menu-link__active' : '' }}"
+                       href="{{route('home')}}">Главная страница</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link "
-                       href="#">Каталог статей</a>
+                    <a class="nav-link menu-link {{ request()->is('articles') ? 'menu-link__active' : '' }} {{ request()->is('articles/*') ? 'menu-link__active' : '' }} "
+                       href="{{route('article.index')}}">Каталог статей</a>
                 </li>
             </ul>
             <a class="d-flex justify-content-end " href="https://github.com/sezamiti">
@@ -34,3 +34,5 @@
 </div>
 </body>
 </html>
+
+

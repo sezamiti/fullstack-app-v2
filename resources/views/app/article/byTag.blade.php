@@ -21,8 +21,13 @@
                         <p>{{$article->createdAtForHumans()}}</p>
                         <a href="{{route('article.show', $article->slug)}}" class="btn btn-primary">Подробнее</a>
                         <div class="mt-3">
-                            <span class="badge bg-primary">{{$article->state->likes}} <i class="far fa-thumbs-up"></i></span>
-                            <span class="badge bg-danger">{{$article->state->views}} <i class="far fa-eye"></i></span>
+                            @if ($article->state)
+                                <span class="badge bg-primary">{{$article->state->likes}} <i class="far fa-thumbs-up"></i></span>
+                                <span class="badge bg-danger">{{$article->state->views}} <i class="far fa-eye"></i></span>
+                            @else
+                                <span class="badge bg-primary">0 <i class="far fa-thumbs-up"></i></span>
+                                <span class="badge bg-danger">0 <i class="far fa-eye"></i></span>
+                            @endif
                         </div>
                         <div class="mt-4">
                             Теги:
@@ -36,5 +41,5 @@
             </div>
         @endforeach
     </div>
-{{--    <div class="mx-auto" style="width: max-content"> >{{$articles->links()}} </div>--}}
+    <div class="mx-auto" style="width: max-content"> {{$articles->links()}} </div>
 @endsection
