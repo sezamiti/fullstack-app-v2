@@ -1,30 +1,55 @@
 import Vue from "vue";
 import Vuex from "vuex"
+import axios from "axios";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        firstname: 'John',
-        lastname: 'Sam'
+        article:{
+            comments: [],
+            tags: [],
+            statistic: {
+                likes:0,
+                views:0,
+            },
+        },
+        slug:''
     },
     actions:{
-        testAction(context, payload){
-            context.commit('SET_FIRSTNAME,', response.data.name)
-            context.commit('SET_LASTNAME,', response.data.name)
+
+        GetArticleData(context, payload){
+            console.log('context', context);
+            console.log('context', payload);
+            axios.get('/api/article-json', {params: {slug:payload}}).then((response)=>{
+                context.commit('SET_ARTICLE', response.data.data);
+            }).catch(()=>{
+                console.log('Error');
+            })
         },
     },
     getters:{
-        getFullName(state){
-            return state.firstname + ' ' + state.lastname;
+        articleViews(state) {
+                return state.article.statistic.views;
+        },
+        articleLikes(state) {
+                return state.article.statistic.likes;
         },
     },
     mutations:{
-        SET_FIRSTNAME(state, payload) {
-            state.firstname = payload;
+        SET_ARTICLE(state, payload) {
+            state.article = {
+                ...state.article, // Сохраняем текущие значения статьи
+                ...payload, // Обновляем значения из полученного payload
+                statistic: {
+                    ...state.article.statistic, // Сохраняем текущие значения статистики
+                    ...(payload.statistic || {}) // Обновляем значения статистики из полученного payload (если они присутствуют)
+                }
+            };
         },
-        SET_LASTNAME(state, payload) {
-            state.lastname = payload;
-        },
-    }
+        SET_SLUG(state, payload){
+            return state.slug = payload;
+        }
+    },
+
 })
