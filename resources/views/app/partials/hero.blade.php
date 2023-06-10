@@ -4,7 +4,10 @@
             <div class="col-12">
                 <div class="hero__content text-center">
                     <div class="hero__content-tag">
-                        <a href="#">Разработчик PHP - Laravel</a>
+                        <a href="#">ТЕСТОВОЕ ЗАДАНИЕ
+                            для кандидата в разработчики сервисов
+                        </a>
+
                     </div>
                 </div>
             </div>
